@@ -1,0 +1,22 @@
+[
+    {
+        "username": "ana",
+        "password": "ana",
+        "total": 5000
+    },
+    {
+        "username": "sam",
+        "password": "sam",
+        "total": 500
+    },
+    {
+        "username": "Alex",
+        "password": "alex",
+        "total": 3000
+    },
+    {
+        "username": "Amy",
+        "password": "amy",
+        "total": 0
+    }
+]
