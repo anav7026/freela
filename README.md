@@ -29,7 +29,7 @@ Freela is a banking solution tailored for freelancers, helping them automate tax
 
 
 ### Tech Stack 
-- **Frontend:** Python 
+- **Frontend:** HTML & CSS 
 - **Backend:** Flask
 - **Database:** Python 
 
