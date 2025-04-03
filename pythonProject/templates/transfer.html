@@ -1,0 +1,18 @@
+
+<h1>Transfer Funds</h1>
+
+
+
+<form method="POST">
+    <div class="form-group">
+        <label for="receiver_username">Recipient Username:</label>
+        <input type="text" class="form-control" id="receiver_username" name="receiver_username" required>
+    </div>
+    <div class="form-group">
+        <label for="transfer_amount">Transfer Amount ($):</label>
+        <input type="number" class="form-control" id="transfer_amount" name="transfer_amount" step="0.01" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Transfer</button>
+</form>
+
+<a href="{{ url_for('welcome', username=username) }}" class="btn btn-secondary mt-3">Back to Account</a>

@@ -2,7 +2,7 @@
     {
         "username": "ana",
         "password": "ana",
-        "total": 5000
+        "total": 1900.0
     },
     {
         "username": "sam",
@@ -17,6 +17,16 @@
     {
         "username": "Amy",
         "password": "amy",
+        "total": 100.0
+    },
+    {
+        "username": "Andrew",
+        "password": "123",
+        "total": 3000.0
+    },
+    {
+        "username": "Kim",
+        "password": "123",
         "total": 0
     }
 ]
