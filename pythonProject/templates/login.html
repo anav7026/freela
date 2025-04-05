@@ -1,0 +1,70 @@
+<!--
+Homepage
+<h_> Structure (most important to least):
+    <h1> = Most Important Text
+    <h2> = Action Text
+    <h3> = Sub Titles
+    <h4> = Sub Detail Text
+    <h5> = Freela Title
+    <h6> = Freela Tagline
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Freela</title>
+    <!--Google Font : Poppin-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!---->
+    <link rel="stylesheet" href="/static/login.css"> <!--change .css file to login-->
+</head>
+<body>
+
+    <header>
+        <h5>Freela - Banking For Freelancers</h5>
+        <h6>Bank Your Way</h6>
+        <h3>Login</h3>
+        <h4>Sign in to continue</h4>
+    </header>
+
+    
+
+    <!--Login Form-->
+    <div class="user_login">
+        <form action="/login" method="POST">
+            <label for="username">Username: </label>
+            <input type="text" id="username" name="username">
+            <label for="password">Password: </label>
+            <input type="password" id="password" name="password">
+
+            <input type="submit" value ="Login">
+
+            
+
+        </form>
+    </div>
+
+    <!--Alert Test [Login: if username and password are not successful]-->
+    {% if show_alert %}
+        <div class="login_fail_alert" >
+            <h2>{{alert}}</h2>
+        </div>
+    {% endif %}
+
+    <!--Actions Outside of Login Form Options
+            - Sign Up Button : Button will take you to sign  up page
+            - Forgot Password: Takes you to page to change password
+            - Home Button: Button will take you to home page
+            -->
+
+    <footer>
+        <p>&copy; 2025 Ana Vargas Capstone 4900 </p>
+    </footer>
+</body>
+</html>
