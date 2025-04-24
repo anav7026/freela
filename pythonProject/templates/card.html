@@ -39,13 +39,62 @@ Homepage
         </div>
 
         <div class="card_button_options">
-            <button>Depoist</button>
-            <button>Pay</button>
+            <a href="{{url_for('deposit', username=username)}}">
+                <button>Deposit</button>
+            </a>
+            
+            <a href="{{url_for('withdraw', username=username)}}">
+            <button>Withdraw</button>
+            </a>
+            <a href="{{url_for('transfer', username=username)}}"> 
             <button>Transfer Money</button>
-            <button>View/Edit Tax Savings</button>
+            </a>
+            <a href="{{url_for('tax_savings',username=username)}}">
+            <button>View/Edit Tax Savings</button> 
+            </a>
+            <a href="{{url_for('logout')}}">
             <button>Log Out</button>
-
+            </a>
         </div>
+    </div>
+
+    <div class="transaction_table">
+
+        <h1>Transaction History</h1>
+
+{% if transactions and transactions | length >0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date/Time</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tx in transactions %}
+                <tr>
+                    <td>{{ tx.timestamp }}</td>
+                    <td>{{ tx.transaction_type }}</td>
+                    <td>${{ tx.amount }}</td>
+                    <td>
+                        {% if tx.transaction_type == "transfer" %}
+                            To: {{ tx.receiver_id }}
+                        {% elif tx.transaction_type == "received" %}
+                            From: {{ tx.sender_id }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="alert alert-info">No transactions found.</div>
+{% endif %}
+
+<a href="{{ url_for('welcome', username=username) }}" class="btn btn-secondary">Back to Account</a>
+
     </div>
     <footer>
         <p>&copy; 2025 Ana Vargas Capstone 4900  </p>
