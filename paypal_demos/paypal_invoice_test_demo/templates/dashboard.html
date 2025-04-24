@@ -1,0 +1,17 @@
+<h1>Freela Dashboard</h1>
+<p>Total Received: ${{ earnings.total_received }}</p>
+<p>Tax Saved: ${{ earnings.tax_saved }}</p>
+
+<a href="/invoice/new">Create New Invoice</a>
+
+<h2>Invoices</h2>
+<ul>
+{% for id, invoice in invoices.items() %}
+  <li>
+    {{ invoice.email }} | ${{ invoice.amount }} | {{ invoice.status }}
+    {% if invoice.status == 'SENT' %}
+    - <a href="{{ invoice.paypal_url }}" target="_blank">View Invoice</a>
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>
