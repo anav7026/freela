@@ -1,0 +1,88 @@
+<!--
+Homepage
+<h_> Structure (most important to least):
+    <h1> = Most Important Text
+    <h2> = Action Text
+    <h3> = Sub Titles
+    <h4> = Sub Detail Text
+    <h5> = Freela Title
+    <h6> = Freela Tagline
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Freela</title>
+    <!-- Google Font: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/home.css">
+</head>
+<body>
+    <header>
+        <h5>Freela - Banking For Freelancers</h5>
+        <h6>Bank Your Way</h6>
+        
+    </header><h1>INVOICE HISTORY</h1>
+
+    {% if invoices and invoices|length > 0 %}
+    <div class="invoice_table">
+        <table>
+            <thead>
+                <tr>
+                    <th>INVOICE ID</th>
+                    <th>{% if user.role == 'freelancer' %}Client ID{% else %}Freelancer ID{% endif %}</th>
+                    <th>INVOICE DATE</th>
+                    <th>INVOICE DUE DATE</th>
+                    <th>INVOICE TOTAL</th>
+                    <th>STATUS</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for invoice in invoices %}
+                <tr>
+                    <td>{{ invoice.invoice_id }}</td>
+                    <td>{% if user.role == 'freelancer' %}{{ invoice.client_id }}{% else %}{{ invoice.freelancer_id }}{% endif %}</td>
+                    <td>{{ invoice.invoice_date }}</td>
+                    <td>{{ invoice.payment_due_date }}</td>
+                    <td>{{ "$%.2f" |format(invoice.total_amount) }}</td>
+                    <td>{{ invoice.status }}</td>
+                    <td>
+                        <a href="{{ url_for('view_invoice', invoice_id=invoice.invoice_id) }}"><button>VIEW</button></a>
+                        {% if user.role == 'client' %}
+                        <a href="{{ url_for('pay_invoice', invoice_id=invoice.invoice_id) }}"><button>PAY</button></a>
+                        {% endif %}
+                       <!-- {% if user.role == 'freelancer' %}
+                        <a href="{{ url_for('contact', client_id=invoice.client_id) }}"><button>CONTACT CLIENT</button></a>
+                        {% else %}
+                        <a href="{{ url_for('contact', freelancer_id=invoice.freelancer_id) }}"><button>CONTACT FREELANCER</button></a>
+                        {% endif %}-->
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>No invoices available at the moment.</p>
+    {% endif %}
+
+    <div>
+        <a href="{{ url_for('invoice_homepage') }}"><button>BACK TO INVOICE HOMEPAGE</button></a>
+        {% if user.role == 'freelancer' %}
+        <a href="{{ url_for('create_invoice') }}"><button>CREATE INVOICE</button></a>
+        {% endif %}
+        <a href="{{ url_for('logout') }}"><button>LOG OUT</button></a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Ana Vargas Capstone 4900</p>
+    </footer>
+</body>
+</html>

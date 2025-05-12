@@ -1,0 +1,95 @@
+
+<!--
+Homepage
+<h_> Structure (most important to least):
+    <h1> = Most Important Text
+    <h2> = Action Text
+    <h3> = Sub Titles
+    <h4> = Sub Detail Text
+    <h5> = Freela Title
+    <h6> = Freela Tagline
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Freela</title>
+    <!--Google Font : Poppin-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!---->
+    <link rel="stylesheet" href="/static/invoice.css">
+</head>
+<body>
+    <header>
+        <h5>Freela - Banking For Freelancers</h5>
+        <h6>Bank Your Way</h6>
+    </header>
+
+    <div class="invoice_info">
+        <div class="invoice_from">
+            <h2>From</h2>
+            <p>{{ freelancer.first_name }} {{ freelancer.last_name }}</p>
+            <p>{{ freelancer.address }}</p>
+            <p>{{ freelancer.city }}, {{ freelancer.state }} {{ freelancer.zip_code }}</p>
+            <p>Email: {{freelancer.email}}</p>
+            
+            
+        </div>
+        <div class="invoice_to">
+            <h2>To</h2>
+                <p>{{ client.first_name }} {{ client.last_name }}</p>
+                <p>{{ client.address }}</p>
+                <p>{{ client.city }}, {{ client.state }} {{ client.zip_code }}</p>
+                <p>Email: {{ client.email }}</p>
+        </div>        
+        <div class="invoice_details" >
+            <h2>Invoice Details</h2>
+            <p>Invoice ID: {{ invoice.invoice_id }}</p>
+            <p>Invoice Date: {{ invoice.invoice_date }}</p>
+            <p>Due Date: {{ invoice.payment_due_date }}</p>
+            <p>Status: {{ invoice.status }}</p>
+        </div>  
+
+        <h3>Invoice Items</h3>
+        <table>
+            <thead>
+                <tr><th>Item</th><th>Description</th><th>Qty</th><th>Unit Price</th></tr>
+            </thead>
+            <tbody>
+                {% for item in invoice.receipt_items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ "%.2f"|format(item.amount) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3>Total Amount: ${{ "%.2f"|format(invoice.total_amount) }}</h3>
+
+        {% if user.role == 'freelancer' %}
+            <a href="{{ url_for('view_all_invoices') }}"><button>Back to Invoices</button></a>
+        {% else %}
+            <a href="{{ url_for('invoice_homepage') }}"><button>Back to Invoices</button></a>
+        {% endif %}
+
+        {% if user.role == 'client' and invoice.status == 'unpaid' or invoice.status == 'overdue' %}
+            <a href="{{ url_for('pay_invoice', invoice_id=invoice.invoice_id) }}"><button>Pay Invoice</button></a>
+        {% endif %}
+
+    
+    </div>
+
+    
+
+    <footer>
+        <p>&copy; 2025 Ana Vargas Capstone 4900  </p>
+    </footer>
+</body>
+</html>

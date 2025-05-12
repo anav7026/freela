@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}My Tax Documents{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">My Tax Documents</h1>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Welcome, {{ user.first_name }}!</h3>
+        </div>
+        <div class="card-body">
+            <p>Track your tax document completion status here. Update your progress as you complete each document.</p>
+        </div>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Form Name</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in tax_docs %}
+                <tr>
+                    <td>
+                        <a href="{{ url_for('tax_document_details', irs_key=item.document.key) }}">
+                            {{ item.document.form_name }}
+                        </a>
+                    </td>
+                    <td>
+                        <span class="{% if 'days remaining' in item.due_date_status and item.due_date_status.split()[0]|int < 15 %}text-danger font-weight-bold{% endif %}">
+                            {{ item.document.due_date }}<br>
+                            <small>{{ item.due_date_status }}</small>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge {% if item.status == 'Completed' %}badge-success{% elif item.status == 'In Progress' %}badge-warning{% else %}badge-secondary{% endif %}">
+                            {{ item.status }}
+                        </span>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('update_tax_document_status') }}" method="post" class="form-inline">
+                            <input type="hidden" name="irs_key" value="{{ item.document.key }}">
+                            <select name="status" class="form-control form-control-sm mr-2">
+                                <option value="Not Started" {% if item.status == 'Not Started' %}selected{% endif %}>Not Started</option>
+                                <option value="In Progress" {% if item.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                                <option value="Completed" {% if item.status == 'Completed' %}selected{% endif %}>Completed</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="mt-4">
+        <a href="{{ url_for('welcome') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

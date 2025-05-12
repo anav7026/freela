@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Funds</title>
+    <!-- Google Font: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/home.css">
+</head>
+<body>
+    <header>
+        <h5>Freela - Banking For Freelancers</h5>
+        <h6>Bank Your Way</h6>
+    </header>
+
+    <div class="transfer_form">
+        <h2>Transfer Funds</h2>
+        <form action="{{ url_for('transfer', username=username) }}" method="POST">
+            <label for="receiver_id">Select Receiver:</label>
+            <select name="receiver_id" id="receiver_id" required>
+                {% for user in users %}
+                    <option value="{{ user.user_id }}"
+                        {% if receiver_id == user.user_id %} selected {% endif %}>
+                        {{ user.first_name }} {{ user.last_name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label for="transfer_amount">Enter Amount to Transfer:</label>
+            <input type="number" id="transfer_amount" name="transfer_amount" step="0.01" required>
+
+            <input type="submit" value="Transfer">
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Ana Vargas Capstone 4900</p>
+    </footer>
+</body>
+</html>

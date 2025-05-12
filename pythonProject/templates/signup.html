@@ -1,0 +1,83 @@
+<!--
+Homepage
+<h_> Structure (most important to least):
+    <h1> = Most Important Text
+    <h2> = Action Text
+    <h3> = Sub Titles
+    <h4> = Sub Detail Text
+    <h5> = Freela Title
+    <h6> = Freela Tagline
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Freela</title>
+    <!--Google Font : Poppin-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!---->
+    <link rel="stylesheet" href="/static/signup.css"> 
+</head>
+<body>
+    <header>
+        <h5>Freela - Banking For Freelancers</h5>
+        <h6>Bank Your Way</h6>
+        <h3>Sign Up</h3>
+        
+    </header>
+
+    <div id="user_signup">
+        <form action="/signup" method="POST">
+            <label for="username">Username: </label>
+            <input type="text" id="username" name="username" required><br>
+            
+            <label for="password">Password: </label>
+            <input type="password" id="password" name="password" required><br>
+
+            <label for="first_name">First Name: </label>
+            <input type="text" id="first_name" name="first_name" required> <br>
+            
+            <label for="last_name">Last Name: </label>
+            <input type="last_name" id="last_name" name="last_name" required> <br>
+            
+            <label for="email">Email: </label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="SSN">SSN: </label>
+            <input type="password" id="SSN" name="SSN" required ><br>
+            
+            <label for="street_address">Address: </label>
+            <input type="text" id="street_address" name="street_address" required><br>
+            <label for="apt">Apartment #: </label>
+            <input type="text" id="apt" name="apt"><br>
+            <label for="city">City: </label>
+            <input type="text" id="city" name="city" required><br>
+            <label for="state">State: </label>
+            <input type="text" id="state" name="state" required><br>
+            <label for="zip_code">Zip Code: </label>
+            <input type="text" id="zip_code" name="zip_code" required><br>
+           
+
+            <label for="role">Who are you? </label>
+            <select name="role" id="role">
+                <option value="client">Client</option>
+                <option value="freelancer">Freelancer</option>
+            </select>
+            
+
+            <input type="submit" value ="Sign Up">
+            
+        </form>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Ana Vargas Capstone 4900 </p>
+    </footer>
+</body>
+</html>

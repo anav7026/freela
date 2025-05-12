@@ -1,0 +1,45 @@
+body{
+    font-family: 'Poppins';
+    text-align: center;
+}
+
+
+
+h5{ /*Freela Title*/
+    color: green;
+    font-size: xx-large;
+    font-weight: bold;
+    
+}
+
+h6{/*Freela Tagline*/
+    color: grey;
+    font-size: small;
+    font-style: italic;
+
+}
+
+button{ 
+    background-color: green;
+    color:white;
+    padding: 20px 40px;
+    font-size: large;
+    font-weight: bold;
+    
+}
+button:hover{
+    background: linear-gradient(60deg,yellowgreen, green);
+}
+
+table
+{
+    margin: 0 auto;
+    width: 80%;
+    border-collapse: collapse;
+}
+th, td
+{
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
